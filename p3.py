@@ -1,72 +1,35 @@
-carros = []
-
-agregar_carro = lambda marca, modelo, año, placa: carros.append({
-    "marca": marca,
-    "modelo": modelo,
-    "año": año,
-    "placa": placa
-})
-
-mostrar_carros = lambda: [print(f"{key}: {value}") for carro in carros for key, value in carro.items()]
-
-actualizar_informacion = lambda opcion: {
-    "1": lambda: input("Ingrese la nueva marca: "),
-    "2": lambda: input("Ingrese el nuevo modelo: "),
-    "3": lambda: int(input("Ingrese el nuevo año: ")),
-    "4": lambda: input("Ingrese la nueva placa: ")
-}[opcion]()
-
-con_carros = 0
+# Calculadora con funciones lambda
+suma = lambda x, y: x + y
+resta = lambda x, y: x - y
+multiplicacion = lambda x, y: x * y
+division = lambda x, y: x / y if y != 0 else "Error: División por cero"
 
 while True:
-    print("=" * 20)
-    print("Menu:")
-    print("1. Agregar Carro")
-    print("2. Consultar Carros")
-    print("3. Actualizar Información de Carro")
-    print("0. Salir")
-    print("=" * 20)
-    
-    opcion = input("Seleccione una opción: ")
+    print("=" * 30)
+    print("Calculadora Matemática")
+    print("1. Sumar")
+    print("2. Restar")
+    print("3. Multiplicar")
+    print("4. Dividir")
+    print("5. Salir")
+    print("=" * 30)
 
-    if opcion == "1":
-        marca = input("Ingrese la marca del carro: ")
-        modelo = input("Ingrese el modelo del carro: ")
-        año = int(input("Ingrese el año del carro: "))
-        placa = input("Ingrese la placa del carro: ")
-        
-        agregar_carro(marca, modelo, año, placa)
-        
-        print("-" * 30)
-        mostrar_carros()
-        
-    elif opcion == "2":
-        if carros:
-            print("Lista de Carros:")
-            mostrar_carros()
-        else:
-            print("No hay carros registrados.")
-            
-    elif opcion == "3":
-        if carros:
-            mostrar_carros()
-            indice = int(input("Ingrese el número de carro que desea actualizar: "))
-            if 0 < indice <= len(carros):
-                nuevo_valor = actualizar_informacion(opcion)
-                campo_actualizado = list(carros[indice - 1].keys())[int(opcion) - 1]
-                carros[indice - 1][campo_actualizado] = nuevo_valor
-                print(f"Información actualizada exitosamente para el campo '{campo_actualizado}'.")
-            else:
-                print("Número de carro inválido.")
-        else:
-            print("No hay carros registrados.")
+    opcion = input("Seleccione una opción (1-5): ")
 
-    elif opcion == "0":
-        print("Gracias por usar el sistema.")
+    if opcion in ["1", "2", "3", "4"]:
+        num1 = float(input("Ingrese el primer número: "))
+        num2 = float(input("Ingrese el segundo número: "))
+
+        if opcion == "1":
+            print("Resultado:", suma(num1, num2))
+        elif opcion == "2":
+            print("Resultado:", resta(num1, num2))
+        elif opcion == "3":
+            print("Resultado:", multiplicacion(num1, num2))
+        elif opcion == "4":
+            print("Resultado:", division(num1, num2))
+    elif opcion == "5":
+        print("Gracias por usar la calculadora. ¡Hasta luego!")
         break
     else:
         print("Opción no válida. Intente nuevamente.")
-        
-    con_carros += 1
-
-print("Número de carros registrados:", con_carros)
